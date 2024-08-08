@@ -1,5 +1,6 @@
-export interface ITodo {
+export interface ITodoList {
     id: string;
     name: string;
-    list: string[];
+    description: string;
+    done: boolean;
 }

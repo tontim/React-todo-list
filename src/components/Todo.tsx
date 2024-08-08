@@ -1,25 +1,34 @@
 import { useState} from "react";
-import { ITodo } from "../interfaces";
+import { ITodoList } from "../interfaces";
+import { todoFromData } from "../data";
+
+function TodoItem({todo}: {todo: ITodoList}) {
+    return (
+        <li>
+            <h3>{todo.name}</h3>
+            <p>{todo.description}</p>
+            <p>Done: {todo.done ? 'Yes' : 'No'}</p>
+        </li>
+    );
+}
 
 export function TodoList() {
-    const [todos, setTodos] = useState<ITodo[]>([
-        { id: '1', name:'Todo1', list: ['Do this', 'Do that']},
-        { id: '2', name: 'Todo2', list: ['And this', 'And that']},
-    ]);
+    const [todos, setTodos] = useState<ITodoList[]>(todoFromData);
+    const [newTodo, setNewTodo] = useState<ITodoList>({
+        id: '',
+        name: '',
+        description: '',
+        done: false,
+    });
 
     return (
-        <div>
-            <h1>Todo List</h1>
-            {todos.map((todo) => (
-                <div key={todo.id}>
-                    <h3>{todo.name}</h3>
-                    <ul>
-                        {todo.list.map((task, index) => (
-                            <li key={index}>{task}</li>
-                        ))}
-                    </ul>
-                </div>
-            ))}
+        <div className="container">
+            <h2>Todo List</h2>
+            <ul>
+                {todos.map((todo) => (
+                    <TodoItem key={todo.id} todo={todo} />
+                ))}
+            </ul>
         </div>
     );
 }
