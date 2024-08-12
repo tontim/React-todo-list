@@ -3,4 +3,5 @@ export interface ITodoList {
     name: string;
     description: string;
     done: boolean;
+    date: number;
 }

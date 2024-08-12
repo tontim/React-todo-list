@@ -2,9 +2,9 @@ import { useState} from "react";
 import { ITodoList } from "../interfaces";
 import { todoFromData } from "../data";
 
-function TodoItem({todo}: {todo: ITodoList}) {
+function TodoItem({todo, onToggle }: {todo: ITodoList; onToggle: (id: string) => void}) {
     return (
-        <li>
+        <li onClick={() => onToggle(todo.id)} style={{ cursor: 'pointer'}}>
             <h3>{todo.name}</h3>
             <p>{todo.description}</p>
             <p>Done: {todo.done ? 'Yes' : 'No'}</p>
@@ -34,10 +34,17 @@ export function TodoList() {
             id: Date.now().toString(),
           };
           setTodos((prevTodos) => [...prevTodos, updatedTodo]);
-          setNewTodo({ id: '', name: '', description: '', done: false }); // 
+          setNewTodo({ id: '', name: '', description: '', done: false }); 
         }
       };
 
+    const toggleTodo = (id: string) => {
+      setTodos((prevTodos) =>
+        prevTodos.map((todo) =>
+          todo.id === id ? { ...todo, done: !todo.done} : todo
+        )
+      );
+    }
     return (
     <div className="container">
       <h2>Todo List</h2>
@@ -64,7 +71,7 @@ export function TodoList() {
       
       <ul>
         {todos.map((todo) => (
-          <TodoItem key={todo.id} todo={todo} />
+          <TodoItem key={todo.id} todo={todo} onToggle={toggleTodo}/>
         ))}
       </ul>
     </div>
