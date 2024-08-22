@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { useOutletContex, useNavigate } from 'react-router-dom';
+import { useOutletContext, useNavigate } from 'react-router-dom';
 import { ITodoList } from '../interfaces';
 
 interface AddTodoContextType {
@@ -7,12 +7,12 @@ interface AddTodoContextType {
 }
 
 export function AddTodo() {
-    const {addTodo } = useOutletContex<AddTodoContextType>();
+    const {addTodo } = useOutletContext<AddTodoContextType>();
     const navigate = useNavigate();
     const [newTodo, setNewTodo] = useState({
         name: '',
         description:'',
-        author:'',
+        user:'',
     });
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,9 +22,9 @@ export function AddTodo() {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (newTodo.name && newTodo.description && newTodo.author) {
+        if (newTodo.name && newTodo.description && newTodo.user) {
             addTodo(newTodo);
-            setNewTodo({name: '', description: '', author: ''});
+            setNewTodo({name: '', description: '', user: ''});
             navigate('/');
         }
     };

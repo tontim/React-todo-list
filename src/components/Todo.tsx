@@ -1,7 +1,5 @@
-import { useState} from "react";
 import { useOutletContext } from "react-router-dom";
 import { ITodoList } from "../interfaces";
-import { todoFromData } from "../data";
 
 interface TodoContextType {
   todos: ITodoList[];
@@ -27,7 +25,7 @@ function TodoItem({todo, onToggle }: {todo: ITodoList; onToggle: (id: string) =>
 }
 
 export function TodoList() {
-    const [todos, toggleTodo] = useOutletContext<TodoContextType>();
+    const {todos, toggleTodo} = useOutletContext<TodoContextType>();
 
     return (
       <div className="container">
