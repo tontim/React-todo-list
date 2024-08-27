@@ -1,8 +1,7 @@
 export interface ITodoList {
-    id: string;
+    id: number;
     user: string;
-    name: string;
-    description: string;
+    title: string;
     done: boolean;
-    date: number;
+    date: string;
 }
