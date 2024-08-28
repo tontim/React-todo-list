@@ -3,10 +3,10 @@ import { ITodoList } from "../interfaces";
 
 interface TodoContextType {
   todos: ITodoList[];
-  toggleTodo: (id: string) => void;
+  toggleTodo: (id: number) => void;
 }
 
-function TodoItem({todo, onToggle }: {todo: ITodoList; onToggle: (id: string) => void}) {
+function TodoItem({ todo, onToggle }: {todo: ITodoList; onToggle: (id: number) => void}) {
     return (
         <li onClick={() => onToggle(todo.id)} style={{ cursor: 'pointer'}}>
           <input
@@ -15,11 +15,11 @@ function TodoItem({todo, onToggle }: {todo: ITodoList; onToggle: (id: string) =>
             onChange={() => {}}
             onClick={(e) => e.stopPropagation()}
           /> 
-            <p>By: {todo.user}</p>
-            <h3>{todo.name}</h3>
-            <p>{todo.description}</p>
-            <p>Created: {new Date(todo.date).toLocaleDateString()}</p>
-            <p>Done: {todo.done ? 'Yes' : 'No'}</p>
+          <p>By: {todo.user}</p>
+          <h3>{todo.name}</h3>
+          <p>{todo.description}</p>
+          <p>Created: {new Date(todo.date).toLocaleDateString()}</p>
+          <p>Done: {todo.done ? 'Yes' : 'No'}</p>
         </li>
     );
 }
